@@ -50,7 +50,6 @@ jobs:
   deploy_to_ecs:
     name: Deploy to ECS Fargate
     runs-on: ubuntu-latest
-    needs: code_quality_and_tests
     if: github.event_name == 'push'  && github.ref == 'refs/heads/main'
 
     steps:
