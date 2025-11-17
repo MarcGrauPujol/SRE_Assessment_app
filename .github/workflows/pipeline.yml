@@ -1,4 +1,4 @@
-name: CI/CD ECS Fargate Deployment
+name: CI/CD Pipeline
 
 on:
   # 1. CI Trigger: Executed on Pull Request
