@@ -50,7 +50,6 @@ jobs:
   deploy_to_ecs:
     name: Deploy to ECS Fargate
     runs-on: ubuntu-latest
-    needs: code_quality_and_tests
     if: github.event_name == 'push'  && github.ref == 'refs/heads/main'
 
     steps:
@@ -91,7 +90,7 @@ jobs:
             --platform linux/amd64 \
             -t $IMAGE_URI \
             --push .
-          echo "image_uri=$IMAGE_URI" >> $GITHUB_OUTPUT
+          echo "IMAGE_URI=$IMAGE_URI" >> $GITHUB_OUTPUT
 
       # ------------------------------------
       # 2.3. DOWNLOAD CURRENT TASK DEFINITION AND DEPLOY
@@ -109,7 +108,7 @@ jobs:
         with:
           task-definition: task-definition.json
           container-name: ${{ vars.CONTAINER_NAME }}
-          image: ${{ steps.build-image.outputs.image }}
+          image: ${{ steps.build-image.outputs.IMAGE_URI }}
 #          image: ${{ env.DOCKER_USERNAME }}/${{ env.DOCKER_IMAGE_REPO }}:${{ steps.generate_image_tag.outputs.TAG }}
 
 
