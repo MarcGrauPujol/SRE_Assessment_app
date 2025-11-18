@@ -19,7 +19,7 @@ RUN pip install --upgrade pip &&\
 # Copy the rest of the application code to the container
 COPY . .
 
-# Create a non-root user and switch to it
+# Create a non-root user, give ownership of the app directory,and switch to that user
 RUN useradd --create-home myuser && \
     chown -R myuser:myuser /app
 USER myuser
